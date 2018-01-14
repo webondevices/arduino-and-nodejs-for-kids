@@ -1,30 +1,30 @@
-var five = require('johnny-five');
-var helpers = require('./helpers');
+const five = require('johnny-five');
+const helpers = require('./helpers');
 
 helpers.addHelpers();
 
-var board;
+let board;
 
-var arduino = {
-    addArduino: function () {
+const arduino = {
+    addArduino () {
         board = new five.Board({repl: false});
         board.when = board.on;
         return board;
     },
-    addButton: function (pin) {
-        var button = new five.Button(pin);
+    addButton (pin) {
+        const button = new five.Button(pin);
         button.when = button.on;
         return button;
     },
-    addLed: function (pin) {
-        var led = new five.Led(pin);
+    addLed (pin) {
+        const led = new five.Led(pin);
         led.lightness = value => {
             led.brightness(value * 25.5);
         };
         return led;
     },
-    addSensor: function (pin) {
-        var sensor = new five.Sensor({
+    addSensor (pin) {
+        const sensor = new five.Sensor({
             pin: 'A' + pin,
             freq: 1000
         });
@@ -32,20 +32,21 @@ var arduino = {
         return sensor;
     },
     addLightSensor: this.addSensor,
-    addMotionSensor: function (pin) {
-        var motion = new five.Motion(pin);
+    addMotionSensor (pin) {
+        const motion = new five.Motion(pin);
         motion.when = motion.on;
         return motion;
     },
-    addMatrix: function (data, cs, clock) {
+    addMatrix (data, cs, clock) {
         return new five.Led.Matrix({pins: {data, cs, clock}});
     },
-    addMotor: function (pwm, dir, cdir) {
-        var motor = {};
+    addMotor (pwm, dir, cdir) {
+        const motor = {};
+        const dir = new five.Pin(dir);
+        const cdir = new five.Pin(cdir);
+        let resetTimer = null;
+
         board.pinMode(pwm, five.Pin.PWM);
-        var dir = new five.Pin(dir);
-        var cdir = new five.Pin(cdir);
-        var resetTimer = null;
 
         motor.goForward = speed => {
             dir.low();

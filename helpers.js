@@ -1,4 +1,4 @@
-var say = require('say');
+const say = require('say');
 
 function addHelpers () {
     global.write = console.log;
@@ -14,10 +14,10 @@ function addHelpers () {
     global.forever = Number.POSITIVE_INFINITY;
     global.never = 0;
     global.repeat = function (iterations, delay, callback) {
-        var count = 0;
-        var timer = null;
+        let count = 0;
+        let timer = null;
 
-        var iterate = function() {
+        const iterate = () => {
             if (count < iterations) {
                 callback(count + 1);
                 timer = setTimeout(iterate, delay * 1000);
@@ -30,6 +30,4 @@ function addHelpers () {
     };
 }
 
-module.exports = {
-    addHelpers: addHelpers
-}
+module.exports = {addHelpers};
