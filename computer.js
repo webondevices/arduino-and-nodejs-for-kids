@@ -2,6 +2,9 @@ const exec = require('child_process').exec;
 const helpers = require('./helpers');
 const keypress  = require('keypress');
 
+var player = require('play-sound')(opts = {});
+var audio = null;
+
 helpers.addHelpers();
 
 const keyEvents = {};
@@ -22,9 +25,12 @@ process.stdin.on('keypress', function (ch, key) {
 class Computer {
     when (e, callback) {
         const event = e.split(' ');
+        const type = event.shift();
 
-        if (event[0] === 'key') {
-            keyEvents[event[1]] = callback;
+        if (type === 'key') {
+            event.forEach(key => {
+                keyEvents[key] = callback;
+            });
         }
     }
 }
@@ -52,6 +58,12 @@ const computer = {
                 exec(`open -a VLC ${fileName}.mkv`);
             }
         });
+    },
+    playSound (file) {
+        audio = player.play(file);
+    },
+    stopSound () {
+        audio.kill();
     }
 };
 
