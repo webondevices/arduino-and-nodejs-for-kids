@@ -31,7 +31,9 @@ const arduino = {
         sensor.when = sensor.on;
         return sensor;
     },
-    addLightSensor: this.addSensor,
+    addLightSensor (pin) {
+        return this.addSensor(pin);
+    },
     addMotionSensor (pin) {
         const motion = new five.Motion(pin);
         motion.when = motion.on;
