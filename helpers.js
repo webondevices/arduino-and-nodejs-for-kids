@@ -1,12 +1,18 @@
 const say = require('say');
 
 function addHelpers () {
+
+    let message = '';
+
     global.write = console.log;
     global.wait = function (s, cb) {
         setTimeout(cb, s * 1000);
     }
     global.speak = function (msg) {
-        say.speak(msg);
+        if (message !== msg) {
+            say.speak(msg);
+            message = msg;
+        }
     };
     global.toPercent = function (value) {
         return Math.round(((1024 - value) / 1024) * 100);
@@ -28,6 +34,9 @@ function addHelpers () {
         iterate();
         
     };
+    global.limit = function (value) {
+        return parseInt(((1024 - value) / 1024 ) * 10) + 1;
+    }
 }
 
 module.exports = {addHelpers};
