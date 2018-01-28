@@ -4,10 +4,8 @@ var myArduino = arduino.addArduino()
 
 myArduino.when('ready', () => {
 
-    write('I really like this!')
-
-    wait(4, () => {
-        write('I have a pigglet')
+    repeat(5, 2, () => {
+        write('Hello!')
     })
 
 })

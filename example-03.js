@@ -8,6 +8,6 @@ myArduino.when('ready', () => {
     var emilsBalls = 1
     var matesBalls = 9
 
-    write('Balls in total: ' + (mayasballs + emilsblass + matesballs))
+    write('Balls in total: ' + (mayasBalls + emilsBalls + matesBalls))
 
 })

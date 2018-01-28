@@ -10,5 +10,6 @@ myArduino.when('ready', () => {
     myPrettyLed.pulse()
     myPrettyLed.on()
     myPrettyLed.off()
-
+    myPrettyLed.lightness(10)
+    
 })
