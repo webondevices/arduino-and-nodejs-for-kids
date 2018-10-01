@@ -49,6 +49,16 @@ const computer = {
             }
         });
     },
+    takePIPhoto () {
+        const fileName = Date.now();
+        exec(`raspistill -vf -hf -o ./images/${filename} -w 1920 -h 1440 -t 1000`, (error, stdout, stderr) => {
+            if (error) {
+              console.error(`exec error: ${error}`);
+            } else {
+                exec(`open -a Preview ${fileName}.jpg`);
+            }
+        });
+    },
     recordVideo (length) {
         const fileName = Date.now();
         exec(`ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -t ${length} -i "0:2" ${fileName}.mkv`, (error, stdout, stderr) => {

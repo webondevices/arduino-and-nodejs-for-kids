@@ -1,8 +1,7 @@
 var computer = require("./computer");
 
-var fiveMinutes = 60 * 5;
-var infinity = Number.POSITIVE_INFINITY;
+var fiveMinutes = 5 * 60;
 
 repeat(infinity, fiveMinutes, () => {
-  computer.takePhoto();
+  computer.takePIPhoto();
 });
